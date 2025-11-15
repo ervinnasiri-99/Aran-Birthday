@@ -506,7 +506,7 @@ function setupFunFacts() {
 }
 
 function setupVault() {
-  if (!gsap || !window.THREE) return;
+  if (!gsap) return;
 
   const lock = document.getElementById("vault-lock");
   const unlockedPanel = document.getElementById("vault-unlocked");
@@ -525,7 +525,7 @@ function setupVault() {
 
 function unlockVault(lock, panel, giftContainer) {
   const gsapLocal = gsap;
-  if (!gsapLocal || !window.lottie) return;
+  if (!gsapLocal) return;
 
   gsapLocal.to(lock, {
     scale: 1.2,
@@ -534,19 +534,22 @@ function unlockVault(lock, panel, giftContainer) {
     ease: "power2.out",
   });
 
-  gsapLocal.to("#hero-confetti", {
-    opacity: 1,
-    duration: 0.1,
-    onStart: () => {
-      window.lottie.loadAnimation({
-        container: document.getElementById("hero-confetti"),
-        renderer: "svg",
-        loop: false,
-        autoplay: true,
-        path: "https://assets2.lottiefiles.com/packages/lf20_xlkxtmul.json",
-      });
-    },
-  });
+  // Confetti only if Lottie is available
+  if (window.lottie) {
+    gsapLocal.to("#hero-confetti", {
+      opacity: 1,
+      duration: 0.1,
+      onStart: () => {
+        window.lottie.loadAnimation({
+          container: document.getElementById("hero-confetti"),
+          renderer: "svg",
+          loop: false,
+          autoplay: true,
+          path: "https://assets2.lottiefiles.com/packages/lf20_xlkxtmul.json",
+        });
+      },
+    });
+  }
 
   panel.classList.remove("hidden");
   gsapLocal.fromTo(
@@ -555,43 +558,45 @@ function unlockVault(lock, panel, giftContainer) {
     { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
   );
 
-  // Simple 3D rotating gift using Three.js
-  const THREE = window.THREE;
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-  const size = giftContainer.clientWidth;
-  renderer.setSize(size, size);
-  giftContainer.innerHTML = "";
-  giftContainer.appendChild(renderer.domElement);
+  // Simple 3D rotating gift using Three.js (optional)
+  if (window.THREE) {
+    const THREE = window.THREE;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    const size = giftContainer.clientWidth;
+    renderer.setSize(size, size);
+    giftContainer.innerHTML = "";
+    giftContainer.appendChild(renderer.domElement);
 
-  camera.position.z = 4;
+    camera.position.z = 4;
 
-  const geo = new THREE.BoxGeometry(1.5, 1.5, 1.5);
-  const mat = new THREE.MeshStandardMaterial({
-    color: 0xfb37ff,
-    emissive: 0x4fd1ff,
-    emissiveIntensity: 0.6,
-    metalness: 0.8,
-    roughness: 0.25,
-  });
-  const cube = new THREE.Mesh(geo, mat);
-  scene.add(cube);
+    const geo = new THREE.BoxGeometry(1.5, 1.5, 1.5);
+    const mat = new THREE.MeshStandardMaterial({
+      color: 0xfb37ff,
+      emissive: 0x4fd1ff,
+      emissiveIntensity: 0.6,
+      metalness: 0.8,
+      roughness: 0.25,
+    });
+    const cube = new THREE.Mesh(geo, mat);
+    scene.add(cube);
 
-  const light = new THREE.PointLight(0xffffff, 1.2, 10);
-  light.position.set(2, 3, 4);
-  scene.add(light);
+    const light = new THREE.PointLight(0xffffff, 1.2, 10);
+    light.position.set(2, 3, 4);
+    scene.add(light);
 
-  const ambient = new THREE.AmbientLight(0xffffff, 0.3);
-  scene.add(ambient);
+    const ambient = new THREE.AmbientLight(0xffffff, 0.3);
+    scene.add(ambient);
 
-  function animate() {
-    requestAnimationFrame(animate);
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.015;
-    renderer.render(scene, camera);
+    function animate() {
+      requestAnimationFrame(animate);
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.015;
+      renderer.render(scene, camera);
+    }
+    animate();
   }
-  animate();
 }
 
 function setupMiniGame() {
@@ -955,9 +960,7 @@ function init() {
   setupScrollAnimations();
   setupMessageTyping();
   setupMemoryParallax();
-  setupFunFacts();
   setupVault();
-  setupMiniGame();
   setupGiftBox();
   setupFooterBlobs();
   setupIntroAnimation();

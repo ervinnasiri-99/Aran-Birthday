@@ -370,51 +370,6 @@
         </div>
       </section>
 
-      <!-- FUN FACTS HUB -->
-      <section id="fun-facts" class="relative py-24 px-6 bg-gradient-to-b from-slate-950/60 to-black">
-        <div class="max-w-5xl mx-auto">
-          <header class="mb-8 text-center">
-            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Senin Hakkında Tatlı Detaylar</h2>
-            <p class="text-slate-300/80">
-              Kartların üstüne geldiğinde hafifçe döner; renkler değişirken seninle ilgili küçük detaylar ortaya çıkar.
-            </p>
-          </header>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <div class="fun-card flip-card glass-panel rounded-3xl p-5 interactive sound-hover">
-              <div class="flip-inner">
-                <div class="flip-front">
-                  <p class="text-sm font-medium">En sevdiğin atıştırmalık?</p>
-                </div>
-                <div class="flip-back">
-                  <p class="text-sm text-neonCyan">Yorgun hissettiğinde bile seni gülümseten küçük bir atıştırmalık hep vardır.</p>
-                </div>
-              </div>
-            </div>
-            <div class="fun-card flip-card glass-panel rounded-3xl p-5 interactive sound-hover">
-              <div class="flip-inner">
-                <div class="flip-front">
-                  <p class="text-sm font-medium">Gizli yeteneğin?</p>
-                </div>
-                <div class="flip-back">
-                  <p class="text-sm text-neonPink">Sıradan anları bile bir anda eğlenceli ve unutulmaz hâle getirmek.</p>
-                </div>
-              </div>
-            </div>
-            <div class="fun-card flip-card glass-panel rounded-3xl p-5 interactive sound-hover">
-              <div class="flip-inner">
-                <div class="flip-front">
-                  <p class="text-sm font-medium">Seni en iyi anlatan özellik?</p>
-                </div>
-                <div class="flip-back">
-                  <p class="text-sm text-neonPurple">Her şeyi bir anda neşelendiren bakışın ve gülüşün.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <!-- SECRET VAULT ZONE -->
       <section id="vault" class="relative py-24 px-6">
         <div class="max-w-4xl mx-auto text-center">
@@ -447,26 +402,6 @@
         </div>
       </section>
 
-      <!-- MINI GAME -->
-      <section id="mini-game" class="relative py-24 px-6 bg-slate-950/70">
-        <div class="max-w-4xl mx-auto text-center">
-          <h2 class="text-3xl md:text-4xl font-semibold mb-3">Yıldızlı Anlar Alanı</h2>
-          <p class="text-slate-300/80 mb-8">
-            İmlecini hareket ettirdikçe etrafa yayılmış küçük yıldızlar toplanır; her biri, senin için dilediğimiz güzel anları temsil ediyor.
-          </p>
-
-          <div
-            id="game-area"
-            class="relative overflow-hidden rounded-3xl glass-panel shadow-neon-soft h-72 max-w-3xl mx-auto interactive"
-          >
-            <!-- Stars and obstacles are injected by JS -->
-            <div class="absolute top-4 left-4 text-xs text-slate-200/80 text-left">
-              Yıldızlar: <span id="game-score" class="text-neonCyan font-semibold">0</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <!-- GIFT BOX REVEAL -->
       <section id="gift" class="relative py-24 px-6">
         <div class="max-w-4xl mx-auto text-center">
@@ -483,6 +418,37 @@
                 Aran, bu yıl senin için sadece bir yaş daha büyüdüğün bir gün değil; ailece seninle ne kadar gurur
                 duyduğumuzu tekrar tekrar hatırladığımız bir gün. Hayallerinin peşinden gitmeye devam et; annen, baban ve
                 abin Ervin olarak her adımında yanında duracak, düştüğünde kaldıracak ve ışığını asla yalnız bırakmayacağız.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUOTES WALL (moved up, more prominent) -->
+      <section id="quotes" class="relative py-24 px-6 bg-gradient-to-b from-slate-950/80 to-black">
+        <div class="max-w-5xl mx-auto">
+          <header class="mb-10 text-center">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Sözler ve Notlar</h2>
+            <p class="text-slate-300/90 max-w-2xl mx-auto">
+              Bu bölümdeki cümleler, seninle ilgili hissettiğimiz gururu ve sevgiyi sakince ama çok net bir şekilde
+              hatırlatsın.
+            </p>
+          </header>
+
+          <div class="relative overflow-hidden rounded-3xl glass-panel shadow-neon-soft py-12 px-8">
+            <div class="quotes-spotlight absolute inset-0 pointer-events-none"></div>
+            <div class="space-y-6 relative z-10">
+              <p class="text-lg md:text-xl text-slate-50/95">
+                “Sen sadece etrafındaki dünyayı yaşamıyorsun; ona his ve renk katıyorsun.”
+              </p>
+              <p class="text-lg md:text-xl text-slate-50/95">
+                “Büyümek, başka biri olmak değil; zaten içinde olan güzellikleri yavaş yavaş açığa çıkarmak demek.”
+              </p>
+              <p class="text-lg md:text-xl text-slate-50/95">
+                “Fikirlerin farklı, cesur ve özgün; onları asla küçümseme.”
+              </p>
+              <p class="text-lg md:text-xl text-slate-50/95">
+                “Her yeni yaş, kendi hikâyeni daha özgürce yazman için bir fırsat.”
               </p>
             </div>
           </div>
@@ -520,34 +486,6 @@
               <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
                 <div class="progress-bar h-2 bg-gradient-to-r from-neonPink to-neonCyan w-0"></div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- QUOTES WALL -->
-      <section id="quotes" class="relative py-24 px-6">
-        <div class="max-w-5xl mx-auto">
-          <header class="mb-8 text-center">
-            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Sözler ve Notlar</h2>
-            <p class="text-slate-300/80">İmlecini duvarın üzerinde gezdirirken, senin için seçilmiş cümleler yavaşça ortaya çıkar.</p>
-          </header>
-
-          <div class="relative overflow-hidden rounded-3xl glass-panel shadow-neon-soft py-10 px-6">
-            <div class="quotes-spotlight absolute inset-0 pointer-events-none"></div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
-              <p class="text-sm text-slate-200/90">
-                “Sen sadece etrafındaki dünyayı yaşamıyorsun; ona his ve renk katıyorsun.”
-              </p>
-              <p class="text-sm text-slate-200/90">
-                “Büyümek, başka biri olmak değil; zaten içinde olan güzellikleri yavaş yavaş açığa çıkarmak demek.”
-              </p>
-              <p class="text-sm text-slate-200/90">
-                “Fikirlerin farklı, cesur ve özgün; onları asla küçümseme.”
-              </p>
-              <p class="text-sm text-slate-200/90">
-                “Her yeni yaş, kendi hikâyeni daha özgürce yazman için bir fırsat.”
-              </p>
             </div>
           </div>
         </div>
