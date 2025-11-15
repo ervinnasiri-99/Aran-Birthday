@@ -470,10 +470,10 @@ function setupVault() {
   if (!lock || !unlockedPanel || !giftContainer) return;
 
   let collected = 0;
-  const required = shards.length;
+  const required = 1; // make unlocking much easier – only one shard needs to be clicked
 
   shards.forEach((shard) => {
-    shard.addEventListener("pointerdown", () => {
+    shard.addEventListener("click", () => {
       const lockRect = lock.getBoundingClientRect();
       const target = {
         x: lockRect.left + lockRect.width / 2 - shard.offsetWidth / 2,

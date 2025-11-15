@@ -8,20 +8,21 @@
 
     <!-- Tailwind CDN + config -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
+      <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              neonBlue: '#4fd1ff',
-              neonPurple: '#a855f7',
-              neonPink: '#fb37ff',
-              neonCyan: '#22d3ee',
+              // Green neon Material You expressive palette
+              neonBlue: '#22c55e',   // primary neon green
+              neonPurple: '#16a34a', // deeper green accent
+              neonPink: '#4ade80',   // soft lime/green
+              neonCyan: '#a3e635',   // yellow-green highlight
               deepSpace: '#050816',
             },
             boxShadow: {
-              'neon-soft': '0 0 40px rgba(79,209,255,0.35)',
-              'neon-strong': '0 0 80px rgba(168,85,247,0.7)',
+              'neon-soft': '0 0 40px rgba(34,197,94,0.35)',
+              'neon-strong': '0 0 80px rgba(34,197,94,0.75)',
             },
             backdropBlur: {
               glass: '20px',
@@ -59,15 +60,15 @@
       body {
         margin: 0;
         font-family: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        background: radial-gradient(circle at top, #1f2937 0, #020617 40%, #000 100%);
+        background: radial-gradient(circle at top, #064e3b 0, #020617 45%, #000 100%);
         overflow-x: hidden;
         cursor: none; /* hide default cursor */
       }
       .glass-panel {
-        background: radial-gradient(circle at top left, rgba(79, 209, 255, 0.2), transparent 55%),
-          rgba(15, 23, 42, 0.75);
+        background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.22), transparent 55%),
+          rgba(15, 23, 42, 0.85);
         backdrop-filter: blur(20px);
-        border: 1px solid rgba(148, 163, 184, 0.35);
+        border: 1px solid rgba(74, 222, 128, 0.35);
       }
       .no-select {
         -webkit-user-select: none;
@@ -378,9 +379,9 @@
       <!-- SECRET VAULT ZONE -->
       <section id="vault" class="relative py-24 px-6">
         <div class="max-w-4xl mx-auto text-center">
-          <h2 class="text-3xl md:text-4xl font-semibold mb-3">Sürpriz Mektuplar Bölümü</h2>
+          <h2 class="text-3xl md:text-4xl font-semibold mb-3">Srpriz Mektuplar Blm</h2>
           <p class="text-slate-300/80 mb-10 max-w-2xl mx-auto">
-            Renkli parçaları kilidin etrafına sürükle; biraz uğraştıktan sonra içeride seni bekleyen sürpriz bir mesaj ve hediye göreceksin.
+            Renkli paralarn  fzerine t 1fkla; sadece birka f t 1fk sonras 1fnda i eeride seni bekleyen s frpriz bir mesaj ve hediye g eereceksin.
           </p>
 
           <div class="relative flex flex-col items-center gap-8">
