@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aran's Neon Birthday Experience</title>
-    <meta name="description" content="Ultra-premium animated birthday experience for Aran Nasiri from his brother Ervin." />
+    <title>Aran&#39;ın Neon Doğum Günü Kutlaması</title>
+    <meta name="description" content="Ervin&#39;den kardeşi Aran Nasiri&#39;ye özel, animasyonlarla dolu bir doğum günü kutlama sayfası." />
 
     <!-- Tailwind CDN + config -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -78,6 +78,20 @@
     </style>
   </head>
   <body class="text-slate-100">
+    <!-- Intro birthday overlay -->
+    <div
+      id="intro-overlay"
+      class="fixed inset-0 z-40 flex flex-col items-center justify-center bg-black/90"
+    >
+      <h1
+        class="intro-title text-4xl md:text-6xl font-semibold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-neonBlue via-neonPurple to-neonPink mb-4"
+      >
+        İyi ki Doğdun Aran
+      </h1>
+      <p class="intro-subtitle text-sm md:text-lg text-slate-200/80 max-w-xl text-center px-6">
+        Bu site, senin için hazırlanan küçük bir anı ve sevgi dünyası.
+      </p>
+    </div>
     <!-- THREE.js reactive background canvas -->
     <canvas id="bg-canvas" class="fixed inset-0 -z-20"></canvas>
 
@@ -112,19 +126,19 @@
 
         <div class="relative z-10 max-w-4xl glass-panel rounded-3xl px-8 py-10 shadow-neon-soft">
           <p class="uppercase tracking-[0.35em] text-xs md:text-sm text-neonCyan/80 mb-6">
-            LEVEL-UP BIRTHDAY EXPERIENCE
+            ÖZEL DOĞUM GÜNÜ KUTLAMASI
           </p>
           <h1
             class="text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight mb-6 drop-shadow-[0_0_40px_rgba(79,209,255,0.9)]"
           >
-            HAPPY BIRTHDAY
+            İYİ Kİ DOĞDUN
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonBlue via-neonPurple to-neonPink">
               ARAN NASIRI
             </span>
           </h1>
           <p class="text-base md:text-lg text-slate-200/80 mb-10 max-w-2xl mx-auto">
-            From your brother <span class="text-neonCyan font-semibold">Ervin</span> — welcome to your very own
-            neon cyber playground, crafted with love, pixels, and a lot of over-the-top animations.
+            Ağabeyin <span class="text-neonCyan font-semibold">Ervin</span>&#39;den sana — sevgi, anılar ve sürprizlerle
+            dolu, sadece senin için hazırlanmış bir sayfa.
           </p>
 
           <div class="flex flex-wrap justify-center gap-4 md:gap-6 mt-4">
@@ -132,22 +146,22 @@
               class="hero-cta neon-button magnetic interactive group px-7 py-3 rounded-full glass-panel shadow-neon-soft flex items-center gap-2 text-sm md:text-base"
               data-magnet-strength="0.5"
             >
-              <span class="relative z-10">Start the Celebration</span>
-              <span
-                class="relative z-10 w-2 h-2 rounded-full bg-neonPink shadow-[0_0_20px_rgba(251,55,255,0.9)] group-hover:scale-150 transition-transform"
-              ></span>
+              <span class="relative z-10">Kutlamaya Başla</span>
             </button>
             <button
               class="hero-cta neon-button magnetic interactive px-7 py-3 rounded-full border border-neonBlue/60 bg-slate-900/60 hover:bg-slate-900/90 shadow-[0_0_35px_rgba(79,209,255,0.65)] text-sm md:text-base"
               data-magnet-strength="0.4"
             >
-              View Epic Memories
+              Anılara Göz At
             </button>
             <button
               class="hero-cta neon-button magnetic interactive px-7 py-3 rounded-full border border-neonPurple/70 bg-gradient-to-r from-neonPurple/40 to-neonPink/30 shadow-[0_0_45px_rgba(168,85,247,0.7)] text-sm md:text-base"
               data-magnet-strength="0.45"
             >
-              Unlock the Secret Vault
+              Sürpriz Mektupları Aç
+            </button>
+          </div>
+        </div>
             </button>
           </div>
         </div>
@@ -157,9 +171,9 @@
       <section id="timeline" class="relative py-24 px-6 bg-gradient-to-b from-transparent to-slate-950/70">
         <div class="max-w-5xl mx-auto">
           <header class="mb-12 text-center">
-            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Interactive Timeline</h2>
+            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Zaman Yolculuğu</h2>
             <p class="text-slate-300/80 max-w-2xl mx-auto">
-              Scroll through some legendary Aran moments, each one powering up as your cursor glides over it.
+              Aşağı kaydırırken Aran&#39;la ilgili özel anların üzerinden geçeceksin; her satırda başka bir hatıra saklı.
             </p>
           </header>
 
@@ -171,11 +185,11 @@
               class="timeline-card neon-card glass-panel rounded-3xl p-6 md:p-8 shadow-neon-soft relative max-w-xl ml-auto magnetic-3d interactive"
             >
               <div class="absolute -left-4 top-8 w-3 h-3 rounded-full bg-neonBlue shadow-neon-strong"></div>
-              <p class="text-xs uppercase tracking-[0.25em] text-neonCyan/70 mb-3">LEVEL 1</p>
-              <h3 class="text-xl md:text-2xl font-semibold mb-2">The Origin Story</h3>
+              <p class="text-xs uppercase tracking-[0.25em] text-neonCyan/70 mb-3">AN 1</p>
+              <h3 class="text-xl md:text-2xl font-semibold mb-2">İlk Gün</h3>
               <p class="text-slate-200/80">
-                The day Aran arrived: the universe quietly patched in a major upgrade. The patch notes? More creativity,
-                more curiosity, more chaos.
+                Aran&#39;ın dünyaya geldiği gün: aileye sessizce gelen ama her şeyi güzelleştiren bir ışık. O günden beri
+                ev daha sıcak, gülüşler daha gerçek.
               </p>
             </article>
 
@@ -183,11 +197,11 @@
               class="timeline-card neon-card glass-panel rounded-3xl p-6 md:p-8 shadow-neon-soft relative max-w-xl mr-auto magnetic-3d interactive"
             >
               <div class="absolute -right-4 top-8 w-3 h-3 rounded-full bg-neonPurple shadow-neon-strong"></div>
-              <p class="text-xs uppercase tracking-[0.25em] text-neonCyan/70 mb-3">LEVEL 2</p>
-              <h3 class="text-xl md:text-2xl font-semibold mb-2">First Boss Fight</h3>
+              <p class="text-xs uppercase tracking-[0.25em] text-neonCyan/70 mb-3">AN 2</p>
+              <h3 class="text-xl md:text-2xl font-semibold mb-2">İlk Büyük Zorluklar</h3>
               <p class="text-slate-200/80">
-                Every challenge you beat made you stronger. This timeline is just a preview of how many bosses you’ve
-                already outplayed.
+                Karşına çıkan her zorluk seni biraz daha büyüttü. Bu satırlar, geride bıraktığın engellerin ve gösterdiğin
+                cesaretin küçük bir özeti.
               </p>
             </article>
 
@@ -195,10 +209,11 @@
               class="timeline-card neon-card glass-panel rounded-3xl p-6 md:p-8 shadow-neon-soft relative max-w-xl ml-auto magnetic-3d interactive"
             >
               <div class="absolute -left-4 top-8 w-3 h-3 rounded-full bg-neonPink shadow-neon-strong"></div>
-              <p class="text-xs uppercase tracking-[0.25em] text-neonCyan/70 mb-3">LEVEL 3</p>
-              <h3 class="text-xl md:text-2xl font-semibold mb-2">Unlocked: Age 12</h3>
+              <p class="text-xs uppercase tracking-[0.25em] text-neonCyan/70 mb-3">AN 3</p>
+              <h3 class="text-xl md:text-2xl font-semibold mb-2">12 Yaş Sayfası</h3>
               <p class="text-slate-200/80">
-                New skills unlocked: deeper thinking, sharper jokes, bigger dreams. This site is your new skill tree.
+                Daha derin düşünceler, daha ince espriler, daha büyük hayaller… Bu site, bugüne kadar biriktirdiğimiz
+                anıların rengârenk bir vitrin gibi.
               </p>
             </article>
           </div>
@@ -209,9 +224,9 @@
       <section id="awesome" class="relative py-24 px-6">
         <div class="max-w-5xl mx-auto">
           <header class="mb-10 text-center">
-            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Why Aran Is Awesome</h2>
+            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Aran&#39;ı Özel Yapan Şeyler</h2>
             <p class="text-slate-300/80 max-w-2xl mx-auto">
-              A holographic wall of reasons why you’re genuinely one of a kind.
+              Seni gerçekten benzersiz yapan özelliklerin küçük bir ışık duvarı gibi yan yana durduğu bir bölüm.
             </p>
           </header>
 
@@ -221,42 +236,42 @@
             <div
               class="awesome-card glass-panel rounded-3xl p-5 shadow-neon-soft magnetic-3d interactive cursor-ripple-target"
             >
-              <h3 class="font-semibold mb-2 text-neonBlue">Creative Mind</h3>
+              <h3 class="font-semibold mb-2 text-neonBlue">Yaratıcı Zihin</h3>
               <p class="text-sm text-slate-200/80">
-                You see ideas where others see blank space — your imagination runs in ultra HD.
+                Başkalarının boşluk gördüğü yerlerde bile sen fikir görüyorsun; hayal gücün her şeyi daha renkli yapıyor.
               </p>
             </div>
             <div
               class="awesome-card glass-panel rounded-3xl p-5 shadow-neon-soft magnetic-3d interactive cursor-ripple-target"
             >
-              <h3 class="font-semibold mb-2 text-neonPurple">Loyal Teammate</h3>
+              <h3 class="font-semibold mb-2 text-neonPurple">Güvenilir Kardeş</h3>
               <p class="text-sm text-slate-200/80">
-                When people squad up with you, they know you’ve got their back in every mission.
+                Yanında olduğunda insanların içi rahat ediyor; sevdiklerine her zaman kalpten destek veriyorsun.
               </p>
             </div>
             <div
               class="awesome-card glass-panel rounded-3xl p-5 shadow-neon-soft magnetic-3d interactive cursor-ripple-target"
             >
-              <h3 class="font-semibold mb-2 text-neonPink">Legendary Humor</h3>
-              <p class="text-sm text-slate-200/80">You drop jokes and reactions that are straight-up clip worthy.</p>
+              <h3 class="font-semibold mb-2 text-neonPink">Harika Mizah Anlayışı</h3>
+              <p class="text-sm text-slate-200/80">Esprilerin ve tepkilerin hep ortamı yumuşatıyor; insanın içini ısıtıyor.</p>
             </div>
             <div
               class="awesome-card glass-panel rounded-3xl p-5 shadow-neon-soft magnetic-3d interactive cursor-ripple-target"
             >
-              <h3 class="font-semibold mb-2 text-neonCyan">Fast Learner</h3>
-              <p class="text-sm text-slate-200/80">You pick up new skills like your brain was built for DLC packs.</p>
+              <h3 class="font-semibold mb-2 text-neonCyan">Hızlı Öğrenen</h3>
+              <p class="text-sm text-slate-200/80">Yeni şeyleri çabucak kavrıyorsun; merakın seni sürekli ileri taşıyor.</p>
             </div>
             <div
               class="awesome-card glass-panel rounded-3xl p-5 shadow-neon-soft magnetic-3d interactive cursor-ripple-target"
             >
-              <h3 class="font-semibold mb-2 text-neonBlue">Kindness Buff</h3>
-              <p class="text-sm text-slate-200/80">You make spaces feel safer and warmer just by being there.</p>
+              <h3 class="font-semibold mb-2 text-neonBlue">Nazik Kalp</h3>
+              <p class="text-sm text-slate-200/80">Sadece varlığın bile ortamı daha sıcak ve güvenli hissettiriyor.</p>
             </div>
             <div
               class="awesome-card glass-panel rounded-3xl p-5 shadow-neon-soft magnetic-3d interactive cursor-ripple-target"
             >
-              <h3 class="font-semibold mb-2 text-neonPurple">Strategic Thinker</h3>
-              <p class="text-sm text-slate-200/80">You analyze, adapt, and make smart moves — in games and in life.</p>
+              <h3 class="font-semibold mb-2 text-neonCyan">Düşünen Zihin</h3>
+              <p class="text-sm text-slate-200/80">Durup düşünüyor, dinliyor ve akıllıca kararlar veriyorsun; bu seni çok olgun gösteriyor.</p>
             </div>
           </div>
         </div>
@@ -284,8 +299,8 @@
       <section id="memories" class="relative py-24 px-6">
         <div class="max-w-5xl mx-auto">
           <header class="mb-8 text-center">
-            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Memory Wall</h2>
-            <p class="text-slate-300/80">Each photo glows and shifts as your cursor explores the wall.</p>
+            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Anı Duvarı</h2>
+            <p class="text-slate-300/80">Her kare, üzerine geldiğinde hafifçe parlayıp hareket ediyor; sanki anılar canlanıyor.</p>
           </header>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -297,19 +312,19 @@
               <div
                 class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
               ></div>
-              <p class="absolute bottom-4 left-4 text-sm font-medium">Victory screen moments</p>
+              <p class="absolute bottom-4 left-4 text-sm font-medium">Kutlama anları</p>
             </div>
             <div
               class="memory-tile group relative overflow-hidden rounded-3xl glass-panel shadow-neon-soft interactive"
             >
               <div class="aspect-[4/3] bg-slate-700/40"></div>
-              <p class="absolute bottom-4 left-4 text-sm font-medium">Family chaos snapshots</p>
+              <p class="absolute bottom-4 left-4 text-sm font-medium">Aile kahkaha anları</p>
             </div>
             <div
               class="memory-tile group relative overflow-hidden rounded-3xl glass-panel shadow-neon-soft interactive"
             >
               <div class="aspect-[4/3] bg-slate-700/40"></div>
-              <p class="absolute bottom-4 left-4 text-sm font-medium">Late-night laugh attacks</p>
+              <p class="absolute bottom-4 left-4 text-sm font-medium">Gece gülme krizleri</p>
             </div>
           </div>
         </div>
@@ -319,9 +334,9 @@
       <section id="fun-facts" class="relative py-24 px-6 bg-gradient-to-b from-slate-950/60 to-black">
         <div class="max-w-5xl mx-auto">
           <header class="mb-8 text-center">
-            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Fun Facts Hub</h2>
+            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Senin Hakkında Tatlı Detaylar</h2>
             <p class="text-slate-300/80">
-              Cards flip toward your cursor, and the cursor trail goes full-color in this zone.
+              Kartların üstüne geldiğinde hafifçe döner; renkler değişirken seninle ilgili küçük detaylar ortaya çıkar.
             </p>
           </header>
 
@@ -329,30 +344,30 @@
             <div class="fun-card flip-card glass-panel rounded-3xl p-5 interactive sound-hover">
               <div class="flip-inner">
                 <div class="flip-front">
-                  <p class="text-sm font-medium">Favorite power snack?</p>
+                  <p class="text-sm font-medium">En sevdiğin atıştırmalık?</p>
                 </div>
                 <div class="flip-back">
-                  <p class="text-sm text-neonCyan">Anything that boosts XP mid-game.</p>
+                  <p class="text-sm text-neonCyan">Yorgun hissettiğinde bile seni gülümseten küçük bir atıştırmalık hep vardır.</p>
                 </div>
               </div>
             </div>
             <div class="fun-card flip-card glass-panel rounded-3xl p-5 interactive sound-hover">
               <div class="flip-inner">
                 <div class="flip-front">
-                  <p class="text-sm font-medium">Secret talent?</p>
+                  <p class="text-sm font-medium">Gizli yeteneğin?</p>
                 </div>
                 <div class="flip-back">
-                  <p class="text-sm text-neonPink">Turning boring moments into mini adventures.</p>
+                  <p class="text-sm text-neonPink">Sıradan anları bile bir anda eğlenceli ve unutulmaz hâle getirmek.</p>
                 </div>
               </div>
             </div>
             <div class="fun-card flip-card glass-panel rounded-3xl p-5 interactive sound-hover">
               <div class="flip-inner">
                 <div class="flip-front">
-                  <p class="text-sm font-medium">Signature move?</p>
+                  <p class="text-sm font-medium">Seni en iyi anlatan özellik?</p>
                 </div>
                 <div class="flip-back">
-                  <p class="text-sm text-neonPurple">That perfectly timed comeback line.</p>
+                  <p class="text-sm text-neonPurple">Her şeyi bir anda neşelendiren bakışın ve gülüşün.</p>
                 </div>
               </div>
             </div>
@@ -363,9 +378,9 @@
       <!-- SECRET VAULT ZONE -->
       <section id="vault" class="relative py-24 px-6">
         <div class="max-w-4xl mx-auto text-center">
-          <h2 class="text-3xl md:text-4xl font-semibold mb-3">Secret Vault Zone</h2>
+          <h2 class="text-3xl md:text-4xl font-semibold mb-3">Sürpriz Mektuplar Bölümü</h2>
           <p class="text-slate-300/80 mb-10 max-w-2xl mx-auto">
-            Drag neon shards into the lock. The cursor will get sticky as you approach the unlock pattern.
+            Renkli parçaları kilidin etrafına sürükle; biraz uğraştıktan sonra içeride seni bekleyen sürpriz bir mesaj ve hediye göreceksin.
           </p>
 
           <div class="relative flex flex-col items-center gap-8">
@@ -373,7 +388,7 @@
               id="vault-lock"
               class="vault-lock glass-panel rounded-full w-40 h-40 flex items-center justify-center shadow-neon-strong mb-6 cursor-pointer"
             >
-              <span class="text-sm uppercase tracking-[0.25em] text-neonCyan/80">LOCK</span>
+              <span class="text-sm uppercase tracking-[0.25em] text-neonCyan/80">KİLİT</span>
             </div>
 
             <div class="flex flex-wrap justify-center gap-4 max-w-md">
@@ -387,10 +402,10 @@
               <h3
                 class="text-2xl md:text-3xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-neonBlue via-neonPurple to-neonPink mb-4"
               >
-                Aran, You’re Legendary
+                Aran, Sen Çok Özelsin
               </h3>
               <p class="text-slate-200/80 max-w-xl mx-auto mb-6">
-                You just cracked the vault — behind it is a 3D rotating gift and a vault of infinite potential.
+                Bu kilidi açtın; şimdi karşına çıkan hediye, senin ne kadar değerli olduğunu hatırlatmak için burada. Önünde çok güzel yıllar var.
               </p>
               <div id="vault-gift-3d" class="w-48 h-48 mx-auto"></div>
             </div>
@@ -401,9 +416,9 @@
       <!-- MINI GAME -->
       <section id="mini-game" class="relative py-24 px-6 bg-slate-950/70">
         <div class="max-w-4xl mx-auto text-center">
-          <h2 class="text-3xl md:text-4xl font-semibold mb-3">Mini Game: Catch the Neon Stars</h2>
+          <h2 class="text-3xl md:text-4xl font-semibold mb-3">Yıldızlı Anlar Alanı</h2>
           <p class="text-slate-300/80 mb-8">
-            Move your cursor to collect stars and avoid the red glitch orbs. Your cursor trail becomes part of the game.
+            İmlecini hareket ettirdikçe etrafa yayılmış küçük yıldızlar toplanır; her biri, senin için dilediğimiz güzel anları temsil ediyor.
           </p>
 
           <div
@@ -412,7 +427,7 @@
           >
             <!-- Stars and obstacles are injected by JS -->
             <div class="absolute top-4 left-4 text-xs text-slate-200/80 text-left">
-              Score: <span id="game-score" class="text-neonCyan font-semibold">0</span>
+              Yıldızlar: <span id="game-score" class="text-neonCyan font-semibold">0</span>
             </div>
           </div>
         </div>
@@ -421,17 +436,17 @@
       <!-- GIFT BOX REVEAL -->
       <section id="gift" class="relative py-24 px-6">
         <div class="max-w-4xl mx-auto text-center">
-          <h2 class="text-3xl md:text-4xl font-semibold mb-4">Gift Box Reveal</h2>
+          <h2 class="text-3xl md:text-4xl font-semibold mb-4">Sürpriz Hediye Kutusu</h2>
           <p class="text-slate-300/80 mb-10">
-            Hover and hold long enough and the box will open to reveal a hologram message from Ervin.
+            Kutunun üzerinde bir süre gezin; içeriden sana özel, Ervin&#39;den gelen küçük bir mektup ortaya çıkacak.
           </p>
 
           <div class="flex flex-col items-center gap-8">
             <div id="gift-box" class="gift-box glass-panel rounded-3xl w-56 h-56 shadow-neon-soft interactive"></div>
             <div id="gift-message" class="max-w-xl mx-auto text-slate-200/90 opacity-0">
               <p>
-                Aran, this year is just another checkpoint. I’m crazy proud of who you’re becoming — keep dreaming bigger
-                than the screen in front of you. I’ll always be your co-op partner.
+                Aran, bu yıl sadece bir yaş daha büyüdüğün bir gün değil; seni ne kadar sevdiğimi tekrar hatırlatmak istediğim bir gün.
+                Hayallerinin peşinden gitmeye devam et; ben her zaman yanında, sessizce gururla bakıyor olacağım.
               </p>
             </div>
           </div>
@@ -442,16 +457,16 @@
       <section id="achievements" class="relative py-24 px-6 bg-gradient-to-b from-black to-slate-950/80">
         <div class="max-w-5xl mx-auto">
           <header class="mb-8 text-center">
-            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Achievements Unlocked</h2>
-            <p class="text-slate-300/80">Live progress bars for skills you keep leveling up.</p>
+            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Gurur Tablosu</h2>
+            <p class="text-slate-300/80">Sende en çok gurur duyduğumuz özelliklerin küçük ışık çubukları halinde gösterimi.</p>
           </header>
 
           <div class="space-y-6">
             <div class="glass-panel rounded-3xl p-5 shadow-neon-soft flex flex-col gap-3">
               <div class="flex items-center justify-between">
-                <span>Creativity</span>
+                <span>Yaratıcılık</span>
                 <span class="badge-icon magnetic inline-flex items-center justify-center w-8 h-8 rounded-full border border-neonBlue/70 shadow-neon-soft text-xs">
-                  S+
+                  ♥
                 </span>
               </div>
               <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
@@ -461,9 +476,9 @@
 
             <div class="glass-panel rounded-3xl p-5 shadow-neon-soft flex flex-col gap-3">
               <div class="flex items-center justify-between">
-                <span>Kindness</span>
+                <span>Nezaket ve Şefkat</span>
                 <span class="badge-icon magnetic inline-flex items-center justify-center w-8 h-8 rounded-full border border-neonPink/70 shadow-neon-soft text-xs">
-                  MAX
+                  ♥
                 </span>
               </div>
               <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
@@ -478,24 +493,24 @@
       <section id="quotes" class="relative py-24 px-6">
         <div class="max-w-5xl mx-auto">
           <header class="mb-8 text-center">
-            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Quotes Wall</h2>
-            <p class="text-slate-300/80">Hover around the wall — your cursor spotlight will reveal quotes.</p>
+            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Sözler ve Notlar</h2>
+            <p class="text-slate-300/80">İmlecini duvarın üzerinde gezdirirken, senin için seçilmiş cümleler yavaşça ortaya çıkar.</p>
           </header>
 
           <div class="relative overflow-hidden rounded-3xl glass-panel shadow-neon-soft py-10 px-6">
             <div class="quotes-spotlight absolute inset-0 pointer-events-none"></div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
               <p class="text-sm text-slate-200/90">
-                “You don’t just play the game — you change how it feels for everyone else.”
+                “Sen sadece etrafındaki dünyayı yaşamıyorsun; ona his ve renk katıyorsun.”
               </p>
               <p class="text-sm text-slate-200/90">
-                “Growing up isn’t about becoming someone else — it’s about unlocking more of who you already are.”
+                “Büyümek, başka biri olmak değil; zaten içinde olan güzellikleri yavaş yavaş açığa çıkarmak demek.”
               </p>
               <p class="text-sm text-slate-200/90">
-                “Your ideas hit different. Don’t ever water them down.”
+                “Fikirlerin farklı, cesur ve özgün; onları asla küçümseme.”
               </p>
               <p class="text-sm text-slate-200/90">
-                “Never forget: every legendary story starts with someone your age deciding to go for it.”
+                “Her yeni yaş, kendi hikâyeni daha özgürce yazman için bir fırsat.”
               </p>
             </div>
           </div>
@@ -506,11 +521,11 @@
       <footer id="footer" class="relative py-10 px-6 border-t border-slate-800/80">
         <div class="max-w-5xl mx-auto flex items-center justify-between gap-4 flex-wrap">
           <p class="text-xs md:text-sm text-slate-400">
-            Crafted for
+            Bu sayfa,
             <span class="text-neonCyan font-semibold">Aran</span>
-            by
+            için
             <span class="text-neonPink font-semibold">Ervin</span>
-            — with way too many animations.
+            tarafından sevgiyle hazırlandı — bolca animasyon eşliğinde.
           </p>
           <button
             id="scroll-top"

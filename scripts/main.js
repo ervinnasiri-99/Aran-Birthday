@@ -18,6 +18,9 @@ function setupSmoothScroll() {
     wheelMultiplier: 1.1,
   });
 
+  // Expose Lenis globally so other setup functions can use smooth scrolling
+  window._lenis = lenis;
+
   function raf(time) {
     lenis.raf(time);
     requestAnimationFrame(raf);
@@ -351,7 +354,7 @@ function setupMessageTyping() {
   if (!el || !gsap) return;
 
   const text =
-    "Aran, I didn’t just want to say happy birthday — I wanted you to have a little universe that feels like you: bright, smart, a bit chaotic, and full of potential. Keep exploring, keep creating, and remember I’m always cheering for your next level.";
+    "Aran, sadece dogum gnn kutlu olsun demek istemedim; sana senin gibi hissettiren kk bir evren hazrlamak istedim: l l, zeki, biraz dank ama batan sona umut dolu. Kefetmeye, retmeye devam et ve bil ki hangi yola girersen gir, her zaman kalbimin en n srasnda seni destekliyorum.";
 
   gsap.fromTo(
     { progress: 0 },
@@ -752,6 +755,35 @@ function setupFooterBlobs() {
   });
 }
 
+function setupIntroAnimation() {
+  if (!gsap) return;
+
+  const overlay = document.getElementById("intro-overlay");
+  if (!overlay) return;
+
+  const title = overlay.querySelector(".intro-title");
+  const subtitle = overlay.querySelector(".intro-subtitle");
+
+  gsap.set([title, subtitle], { opacity: 0, y: 20 });
+
+  gsap
+    .timeline()
+    .to(overlay, { opacity: 1, duration: 0.3, ease: "power2.out" })
+    .to(title, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" })
+    .to(
+      subtitle,
+      { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
+      "-=0.3"
+    )
+    .to(overlay, {
+      opacity: 0,
+      duration: 0.8,
+      delay: 0.8,
+      ease: "power2.inOut",
+      onComplete: () => overlay.remove(),
+    });
+}
+
 function setupHero() {
   if (!gsap) return;
 
@@ -774,6 +806,29 @@ function setupHero() {
     duration: 0.6,
     ease: "power3.out",
   });
+
+  const scrollToSection = (selector) => {
+    const target = document.querySelector(selector);
+    if (!target) return;
+
+    if (window._lenis && typeof window._lenis.scrollTo === "function") {
+      window._lenis.scrollTo(selector, { offset: -80 });
+    } else {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const [startBtn, memoriesBtn, vaultBtn] = buttons;
+
+  if (startBtn) {
+    startBtn.addEventListener("click", () => scrollToSection("#timeline"));
+  }
+  if (memoriesBtn) {
+    memoriesBtn.addEventListener("click", () => scrollToSection("#memories"));
+  }
+  if (vaultBtn) {
+    vaultBtn.addEventListener("click", () => scrollToSection("#gift"));
+  }
 
   if (window.lottie) {
     window.lottie.loadAnimation({
@@ -861,6 +916,7 @@ function init() {
   setupMiniGame();
   setupGiftBox();
   setupFooterBlobs();
+  setupIntroAnimation();
   setupHero();
   setupThreeBackground();
 }
