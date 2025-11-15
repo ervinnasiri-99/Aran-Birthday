@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aran's Neon Birthday Experience</title>
+    <meta name="description" content="Ultra-premium animated birthday experience for Aran Nasiri from his brother Ervin." />
+
+    <!-- Tailwind CDN + config -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              neonBlue: '#4fd1ff',
+              neonPurple: '#a855f7',
+              neonPink: '#fb37ff',
+              neonCyan: '#22d3ee',
+              deepSpace: '#050816',
+            },
+            boxShadow: {
+              'neon-soft': '0 0 40px rgba(79,209,255,0.35)',
+              'neon-strong': '0 0 80px rgba(168,85,247,0.7)',
+            },
+            backdropBlur: {
+              glass: '20px',
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- GSAP + plugins -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MorphSVGPlugin.min.js" defer></script>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js" defer></script>
+
+    <!-- Lottie -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js" defer></script>
+
+    <!-- Base styles for glass / background -->
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      body {
+        margin: 0;
+        font-family: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: radial-gradient(circle at top, #1f2937 0, #020617 40%, #000 100%);
+        overflow-x: hidden;
+        cursor: none; /* hide default cursor */
+      }
+      .glass-panel {
+        background: radial-gradient(circle at top left, rgba(79, 209, 255, 0.2), transparent 55%),
+          rgba(15, 23, 42, 0.75);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(148, 163, 184, 0.35);
+      }
+      .no-select {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body class="text-slate-100">
+    <!-- THREE.js reactive background canvas -->
+    <canvas id="bg-canvas" class="fixed inset-0 -z-20"></canvas>
+
+    <!-- Cursor system -->
+    <div id="cursor-core" class="pointer-events-none fixed inset-0 -z-10"></div>
+    <div
+      id="cursor-outer"
+      class="pointer-events-none fixed w-16 h-16 rounded-full border border-cyan-300/70 shadow-neon-soft mix-blend-screen -translate-x-1/2 -translate-y-1/2"
+    ></div>
+    <div
+      id="cursor-inner"
+      class="pointer-events-none fixed w-3 h-3 rounded-full bg-neonPink shadow-neon-strong -translate-x-1/2 -translate-y-1/2"
+    ></div>
+    <div id="cursor-trail" class="pointer-events-none fixed inset-0 -z-10"></div>
+
+    <!-- Neon click ripple container -->
+    <div id="cursor-ripples" class="pointer-events-none fixed inset-0 -z-10"></div>
+
+    <!-- Confetti Lottie container (hero) -->
+    <div id="hero-confetti" class="pointer-events-none fixed inset-0 -z-10"></div>
+
+    <!-- Layout wrapper used by Lenis for smooth scrolling -->
+    <main id="app" class="relative">
+      <!-- HERO SECTION -->
+      <section
+        id="hero"
+        class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-24 pb-16 relative overflow-hidden"
+      >
+        <div
+          class="absolute inset-0 opacity-60 bg-[radial-gradient(circle_at_top,_rgba(79,209,255,0.25),transparent_60%),radial-gradient(circle_at_bottom,_rgba(168,85,247,0.3),transparent_65%)]"
+        ></div>
+
+        <div class="relative z-10 max-w-4xl glass-panel rounded-3xl px-8 py-10 shadow-neon-soft">
+          <p class="uppercase tracking-[0.35em] text-xs md:text-sm text-neonCyan/80 mb-6">
+            LEVEL-UP BIRTHDAY EXPERIENCE
+          </p>
+          <h1
+            class="text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight mb-6 drop-shadow-[0_0_40px_rgba(79,209,255,0.9)]"
+          >
+            HAPPY BIRTHDAY
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonBlue via-neonPurple to-neonPink">
+              ARAN NASIRI
+            </span>
+          </h1>
+          <p class="text-base md:text-lg text-slate-200/80 mb-10 max-w-2xl mx-auto">
+            From your brother <span class="text-neonCyan font-semibold">Ervin</span> — welcome to your very own
+            neon cyber playground, crafted with love, pixels, and a lot of over-the-top animations.
+          </p>
+
+          <div class="flex flex-wrap justify-center gap-4 md:gap-6 mt-4">
+            <button
+              class="hero-cta neon-button magnetic interactive group px-7 py-3 rounded-full glass-panel shadow-neon-soft flex items-center gap-2 text-sm md:text-base"
+              data-magnet-strength="0.5"
+            >
+              <span class="relative z-10">Start the Celebration</span>
+              <span
+                class="relative z-10 w-2 h-2 rounded-full bg-neonPink shadow-[0_0_20px_rgba(251,55,255,0.9)] group-hover:scale-150 transition-transform"
+              ></span>
+            </button>
+            <button
+              class="hero-cta neon-button magnetic interactive px-7 py-3 rounded-full border border-neonBlue/60 bg-slate-900/60 hover:bg-slate-900/90 shadow-[0_0_35px_rgba(79,209,255,0.65)] text-sm md:text-base"
+              data-magnet-strength="0.4"
+            >
+              View Epic Memories
+            </button>
+            <button
+              class="hero-cta neon-button magnetic interactive px-7 py-3 rounded-full border border-neonPurple/70 bg-gradient-to-r from-neonPurple/40 to-neonPink/30 shadow-[0_0_45px_rgba(168,85,247,0.7)] text-sm md:text-base"
+              data-magnet-strength="0.45"
+            >
+              Unlock the Secret Vault
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- INTERACTIVE TIMELINE -->
+      <section id="timeline" class="relative py-24 px-6 bg-gradient-to-b from-transparent to-slate-950/70">
+        <div class="max-w-5xl mx-auto">
+          <header class="mb-12 text-center">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Interactive Timeline</h2>
+            <p class="text-slate-300/80 max-w-2xl mx-auto">
+              Scroll through some legendary Aran moments, each one powering up as your cursor glides over it.
+            </p>
+          </header>
+
+          <div class="space-y-8 relative">
+            <div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-neonBlue/40 via-neonPurple/60 to-neonPink/40 opacity-60"></div>
+
+            <!-- Timeline cards -->
+            <article
+              class="timeline-card neon-card glass-panel rounded-3xl p-6 md:p-8 shadow-neon-soft relative max-w-xl ml-auto magnetic-3d interactive"
+            >
+              <div class="absolute -left-4 top-8 w-3 h-3 rounded-full bg-neonBlue shadow-neon-strong"></div>
+              <p class="text-xs uppercase tracking-[0.25em] text-neonCyan/70 mb-3">LEVEL 1</p>
+              <h3 class="text-xl md:text-2xl font-semibold mb-2">The Origin Story</h3>
+              <p class="text-slate-200/80">
+                The day Aran arrived: the universe quietly patched in a major upgrade. The patch notes? More creativity,
+                more curiosity, more chaos.
+              </p>
+            </article>
+
+            <article
+              class="timeline-card neon-card glass-panel rounded-3xl p-6 md:p-8 shadow-neon-soft relative max-w-xl mr-auto magnetic-3d interactive"
+            >
+              <div class="absolute -right-4 top-8 w-3 h-3 rounded-full bg-neonPurple shadow-neon-strong"></div>
+              <p class="text-xs uppercase tracking-[0.25em] text-neonCyan/70 mb-3">LEVEL 2</p>
+              <h3 class="text-xl md:text-2xl font-semibold mb-2">First Boss Fight</h3>
+              <p class="text-slate-200/80">
+                Every challenge you beat made you stronger. This timeline is just a preview of how many bosses you’ve
+                already outplayed.
+              </p>
+            </article>
+
+            <article
+              class="timeline-card neon-card glass-panel rounded-3xl p-6 md:p-8 shadow-neon-soft relative max-w-xl ml-auto magnetic-3d interactive"
+            >
+              <div class="absolute -left-4 top-8 w-3 h-3 rounded-full bg-neonPink shadow-neon-strong"></div>
+              <p class="text-xs uppercase tracking-[0.25em] text-neonCyan/70 mb-3">LEVEL 3</p>
+              <h3 class="text-xl md:text-2xl font-semibold mb-2">Unlocked: Age 12</h3>
+              <p class="text-slate-200/80">
+                New skills unlocked: deeper thinking, sharper jokes, bigger dreams. This site is your new skill tree.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHY ARAN IS AWESOME -->
+      <section id="awesome" class="relative py-24 px-6">
+        <div class="max-w-5xl mx-auto">
+          <header class="mb-10 text-center">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Why Aran Is Awesome</h2>
+            <p class="text-slate-300/80 max-w-2xl mx-auto">
+              A holographic wall of reasons why you’re genuinely one of a kind.
+            </p>
+          </header>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- 10–12 hologram cards -->
+            <!-- We'll sample a few; the rest can be cloned with same classnames. -->
+            <div
+              class="awesome-card glass-panel rounded-3xl p-5 shadow-neon-soft magnetic-3d interactive cursor-ripple-target"
+            >
+              <h3 class="font-semibold mb-2 text-neonBlue">Creative Mind</h3>
+              <p class="text-sm text-slate-200/80">
+                You see ideas where others see blank space — your imagination runs in ultra HD.
+              </p>
+            </div>
+            <div
+              class="awesome-card glass-panel rounded-3xl p-5 shadow-neon-soft magnetic-3d interactive cursor-ripple-target"
+            >
+              <h3 class="font-semibold mb-2 text-neonPurple">Loyal Teammate</h3>
+              <p class="text-sm text-slate-200/80">
+                When people squad up with you, they know you’ve got their back in every mission.
+              </p>
+            </div>
+            <div
+              class="awesome-card glass-panel rounded-3xl p-5 shadow-neon-soft magnetic-3d interactive cursor-ripple-target"
+            >
+              <h3 class="font-semibold mb-2 text-neonPink">Legendary Humor</h3>
+              <p class="text-sm text-slate-200/80">You drop jokes and reactions that are straight-up clip worthy.</p>
+            </div>
+            <div
+              class="awesome-card glass-panel rounded-3xl p-5 shadow-neon-soft magnetic-3d interactive cursor-ripple-target"
+            >
+              <h3 class="font-semibold mb-2 text-neonCyan">Fast Learner</h3>
+              <p class="text-sm text-slate-200/80">You pick up new skills like your brain was built for DLC packs.</p>
+            </div>
+            <div
+              class="awesome-card glass-panel rounded-3xl p-5 shadow-neon-soft magnetic-3d interactive cursor-ripple-target"
+            >
+              <h3 class="font-semibold mb-2 text-neonBlue">Kindness Buff</h3>
+              <p class="text-sm text-slate-200/80">You make spaces feel safer and warmer just by being there.</p>
+            </div>
+            <div
+              class="awesome-card glass-panel rounded-3xl p-5 shadow-neon-soft magnetic-3d interactive cursor-ripple-target"
+            >
+              <h3 class="font-semibold mb-2 text-neonPurple">Strategic Thinker</h3>
+              <p class="text-sm text-slate-200/80">You analyze, adapt, and make smart moves — in games and in life.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BROTHER'S MESSAGE -->
+      <section id="message" class="relative py-24 px-6 bg-slate-950/60">
+        <div class="max-w-4xl mx-auto">
+          <header class="mb-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-3">A Message From Ervin</h2>
+            <p class="text-slate-300/80">Hover to intensify the glow — the closer the cursor, the stronger the vibe.</p>
+          </header>
+
+          <div
+            class="glass-panel rounded-3xl p-6 md:p-10 shadow-neon-soft relative overflow-hidden message-panel interactive"
+          >
+            <div class="absolute inset-0 pointer-events-none message-glow"></div>
+            <p class="text-sm uppercase tracking-[0.25em] text-neonCyan/70 mb-4">CINEMATIC MESSAGE</p>
+            <p id="message-typing" class="text-lg md:text-2xl leading-relaxed"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- MEMORY WALL -->
+      <section id="memories" class="relative py-24 px-6">
+        <div class="max-w-5xl mx-auto">
+          <header class="mb-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Memory Wall</h2>
+            <p class="text-slate-300/80">Each photo glows and shifts as your cursor explores the wall.</p>
+          </header>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- Placeholder memory tiles -->
+            <div
+              class="memory-tile group relative overflow-hidden rounded-3xl glass-panel shadow-neon-soft interactive"
+            >
+              <div class="aspect-[4/3] bg-slate-700/40"></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+              ></div>
+              <p class="absolute bottom-4 left-4 text-sm font-medium">Victory screen moments</p>
+            </div>
+            <div
+              class="memory-tile group relative overflow-hidden rounded-3xl glass-panel shadow-neon-soft interactive"
+            >
+              <div class="aspect-[4/3] bg-slate-700/40"></div>
+              <p class="absolute bottom-4 left-4 text-sm font-medium">Family chaos snapshots</p>
+            </div>
+            <div
+              class="memory-tile group relative overflow-hidden rounded-3xl glass-panel shadow-neon-soft interactive"
+            >
+              <div class="aspect-[4/3] bg-slate-700/40"></div>
+              <p class="absolute bottom-4 left-4 text-sm font-medium">Late-night laugh attacks</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FUN FACTS HUB -->
+      <section id="fun-facts" class="relative py-24 px-6 bg-gradient-to-b from-slate-950/60 to-black">
+        <div class="max-w-5xl mx-auto">
+          <header class="mb-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Fun Facts Hub</h2>
+            <p class="text-slate-300/80">
+              Cards flip toward your cursor, and the cursor trail goes full-color in this zone.
+            </p>
+          </header>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div class="fun-card flip-card glass-panel rounded-3xl p-5 interactive sound-hover">
+              <div class="flip-inner">
+                <div class="flip-front">
+                  <p class="text-sm font-medium">Favorite power snack?</p>
+                </div>
+                <div class="flip-back">
+                  <p class="text-sm text-neonCyan">Anything that boosts XP mid-game.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fun-card flip-card glass-panel rounded-3xl p-5 interactive sound-hover">
+              <div class="flip-inner">
+                <div class="flip-front">
+                  <p class="text-sm font-medium">Secret talent?</p>
+                </div>
+                <div class="flip-back">
+                  <p class="text-sm text-neonPink">Turning boring moments into mini adventures.</p>
+                </div>
+              </div>
+            </div>
+            <div class="fun-card flip-card glass-panel rounded-3xl p-5 interactive sound-hover">
+              <div class="flip-inner">
+                <div class="flip-front">
+                  <p class="text-sm font-medium">Signature move?</p>
+                </div>
+                <div class="flip-back">
+                  <p class="text-sm text-neonPurple">That perfectly timed comeback line.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECRET VAULT ZONE -->
+      <section id="vault" class="relative py-24 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl font-semibold mb-3">Secret Vault Zone</h2>
+          <p class="text-slate-300/80 mb-10 max-w-2xl mx-auto">
+            Drag neon shards into the lock. The cursor will get sticky as you approach the unlock pattern.
+          </p>
+
+          <div class="relative flex flex-col items-center gap-8">
+            <div
+              id="vault-lock"
+              class="vault-lock glass-panel rounded-full w-40 h-40 flex items-center justify-center shadow-neon-strong mb-6 cursor-pointer"
+            >
+              <span class="text-sm uppercase tracking-[0.25em] text-neonCyan/80">LOCK</span>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4 max-w-md">
+              <div class="vault-shard w-10 h-10 rounded-xl bg-neonBlue/80 shadow-neon-soft cursor-pointer"></div>
+              <div class="vault-shard w-10 h-10 rounded-xl bg-neonPurple/80 shadow-neon-soft cursor-pointer"></div>
+              <div class="vault-shard w-10 h-10 rounded-xl bg-neonPink/80 shadow-neon-soft cursor-pointer"></div>
+              <div class="vault-shard w-10 h-10 rounded-xl bg-neonCyan/80 shadow-neon-soft cursor-pointer"></div>
+            </div>
+
+            <div id="vault-unlocked" class="hidden mt-8 text-center">
+              <h3
+                class="text-2xl md:text-3xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-neonBlue via-neonPurple to-neonPink mb-4"
+              >
+                Aran, You’re Legendary
+              </h3>
+              <p class="text-slate-200/80 max-w-xl mx-auto mb-6">
+                You just cracked the vault — behind it is a 3D rotating gift and a vault of infinite potential.
+              </p>
+              <div id="vault-gift-3d" class="w-48 h-48 mx-auto"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MINI GAME -->
+      <section id="mini-game" class="relative py-24 px-6 bg-slate-950/70">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl font-semibold mb-3">Mini Game: Catch the Neon Stars</h2>
+          <p class="text-slate-300/80 mb-8">
+            Move your cursor to collect stars and avoid the red glitch orbs. Your cursor trail becomes part of the game.
+          </p>
+
+          <div
+            id="game-area"
+            class="relative overflow-hidden rounded-3xl glass-panel shadow-neon-soft h-72 max-w-3xl mx-auto interactive"
+          >
+            <!-- Stars and obstacles are injected by JS -->
+            <div class="absolute top-4 left-4 text-xs text-slate-200/80 text-left">
+              Score: <span id="game-score" class="text-neonCyan font-semibold">0</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- GIFT BOX REVEAL -->
+      <section id="gift" class="relative py-24 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl font-semibold mb-4">Gift Box Reveal</h2>
+          <p class="text-slate-300/80 mb-10">
+            Hover and hold long enough and the box will open to reveal a hologram message from Ervin.
+          </p>
+
+          <div class="flex flex-col items-center gap-8">
+            <div id="gift-box" class="gift-box glass-panel rounded-3xl w-56 h-56 shadow-neon-soft interactive"></div>
+            <div id="gift-message" class="max-w-xl mx-auto text-slate-200/90 opacity-0">
+              <p>
+                Aran, this year is just another checkpoint. I’m crazy proud of who you’re becoming — keep dreaming bigger
+                than the screen in front of you. I’ll always be your co-op partner.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACHIEVEMENTS SECTION -->
+      <section id="achievements" class="relative py-24 px-6 bg-gradient-to-b from-black to-slate-950/80">
+        <div class="max-w-5xl mx-auto">
+          <header class="mb-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Achievements Unlocked</h2>
+            <p class="text-slate-300/80">Live progress bars for skills you keep leveling up.</p>
+          </header>
+
+          <div class="space-y-6">
+            <div class="glass-panel rounded-3xl p-5 shadow-neon-soft flex flex-col gap-3">
+              <div class="flex items-center justify-between">
+                <span>Creativity</span>
+                <span class="badge-icon magnetic inline-flex items-center justify-center w-8 h-8 rounded-full border border-neonBlue/70 shadow-neon-soft text-xs">
+                  S+
+                </span>
+              </div>
+              <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                <div class="progress-bar h-2 bg-gradient-to-r from-neonBlue to-neonPurple w-0"></div>
+              </div>
+            </div>
+
+            <div class="glass-panel rounded-3xl p-5 shadow-neon-soft flex flex-col gap-3">
+              <div class="flex items-center justify-between">
+                <span>Kindness</span>
+                <span class="badge-icon magnetic inline-flex items-center justify-center w-8 h-8 rounded-full border border-neonPink/70 shadow-neon-soft text-xs">
+                  MAX
+                </span>
+              </div>
+              <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                <div class="progress-bar h-2 bg-gradient-to-r from-neonPink to-neonCyan w-0"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUOTES WALL -->
+      <section id="quotes" class="relative py-24 px-6">
+        <div class="max-w-5xl mx-auto">
+          <header class="mb-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Quotes Wall</h2>
+            <p class="text-slate-300/80">Hover around the wall — your cursor spotlight will reveal quotes.</p>
+          </header>
+
+          <div class="relative overflow-hidden rounded-3xl glass-panel shadow-neon-soft py-10 px-6">
+            <div class="quotes-spotlight absolute inset-0 pointer-events-none"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+              <p class="text-sm text-slate-200/90">
+                “You don’t just play the game — you change how it feels for everyone else.”
+              </p>
+              <p class="text-sm text-slate-200/90">
+                “Growing up isn’t about becoming someone else — it’s about unlocking more of who you already are.”
+              </p>
+              <p class="text-sm text-slate-200/90">
+                “Your ideas hit different. Don’t ever water them down.”
+              </p>
+              <p class="text-sm text-slate-200/90">
+                “Never forget: every legendary story starts with someone your age deciding to go for it.”
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer id="footer" class="relative py-10 px-6 border-t border-slate-800/80">
+        <div class="max-w-5xl mx-auto flex items-center justify-between gap-4 flex-wrap">
+          <p class="text-xs md:text-sm text-slate-400">
+            Crafted for
+            <span class="text-neonCyan font-semibold">Aran</span>
+            by
+            <span class="text-neonPink font-semibold">Ervin</span>
+            — with way too many animations.
+          </p>
+          <button
+            id="scroll-top"
+            class="scroll-top-btn magnetic interactive flex items-center gap-2 px-4 py-2 rounded-full glass-panel shadow-neon-soft text-xs md:text-sm"
+          >
+            <span>Back to Top</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-neonCyan"></span>
+          </button>
+        </div>
+        <div id="footer-blobs" class="pointer-events-none fixed bottom-0 inset-x-0 h-64 -z-10"></div>
+      </footer>
+    </main>
+
+    <!-- Main JS (ES module) -->
+    <script type="module" src="./scripts/main.js"></script>
+  </body>
+</html>
