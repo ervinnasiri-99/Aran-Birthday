@@ -89,9 +89,15 @@
       >
         İyi ki Doğdun Aran
       </h1>
-      <p class="intro-subtitle text-sm md:text-lg text-slate-200/80 max-w-xl text-center px-6">
-        Bu site, senin için hazırlanan küçük bir anı ve sevgi dünyası.
+      <p class="intro-subtitle text-sm md:text-lg text-slate-200/80 max-w-xl text-center px-6 mb-6">
+        Bu site, annenin, babanın ve abin Ervin'in senin için birlikte hazırladığı küçük bir doğum günü evreni.
       </p>
+      <button
+        id="intro-continue"
+        class="neon-button interactive px-6 py-2 rounded-full glass-panel shadow-neon-soft text-xs md:text-sm tracking-[0.25em] uppercase"
+      >
+        Devam Et
+      </button>
     </div>
     <!-- THREE.js reactive background canvas -->
     <canvas id="bg-canvas" class="fixed inset-0 -z-20"></canvas>
@@ -138,8 +144,8 @@
             </span>
           </h1>
           <p class="text-base md:text-lg text-slate-200/80 mb-10 max-w-2xl mx-auto">
-            Ağabeyin <span class="text-neonCyan font-semibold">Ervin</span>&#39;den sana — sevgi, anılar ve sürprizlerle
-            dolu, sadece senin için hazırlanmış bir sayfa.
+            Annen, baban ve ağabeyin <span class="text-neonCyan font-semibold">Ervin</span>&#39;den sana — sevgi, anılar
+            ve sürprizlerle dolu, sadece senin için hazırlanmış bir sayfa.
           </p>
 
           <div class="flex flex-wrap justify-center gap-4 md:gap-6 mt-4">
@@ -278,12 +284,12 @@
         </div>
       </section>
 
-      <!-- BROTHER'S MESSAGE -->
+      <!-- FAMILY MESSAGE -->
       <section id="message" class="relative py-24 px-6 bg-slate-950/60">
         <div class="max-w-4xl mx-auto">
           <header class="mb-8 text-center">
-            <h2 class="text-3xl md:text-4xl font-semibold mb-3">A Message From Ervin</h2>
-            <p class="text-slate-300/80">Hover to intensify the glow — the closer the cursor, the stronger the vibe.</p>
+            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Annen, Baban ve Ervin&#39;den Mektup</h2>
+            <p class="text-slate-300/80">İmlecini metnin üzerinde gezdir; her harfte seni ne kadar sevdiğimizi biraz daha hissedeceksin.</p>
           </header>
 
           <div
@@ -296,36 +302,69 @@
         </div>
       </section>
 
-      <!-- MEMORY WALL -->
+      <!-- MEMORY GALLERY -->
       <section id="memories" class="relative py-24 px-6">
         <div class="max-w-5xl mx-auto">
           <header class="mb-8 text-center">
-            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Anı Duvarı</h2>
-            <p class="text-slate-300/80">Her kare, üzerine geldiğinde hafifçe parlayıp hareket ediyor; sanki anılar canlanıyor.</p>
+            <h2 class="text-3xl md:text-4xl font-semibold mb-3">Fotoğraf Galerisi</h2>
+            <p class="text-slate-300/80">
+              15 fotoğraflık bu galeride, her seferinde sadece bir kareye odaklan; hepsi aynı ölçüde ve aynı ışıltıda
+              görünür.
+            </p>
           </header>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            <!-- Placeholder memory tiles -->
-            <div
-              class="memory-tile group relative overflow-hidden rounded-3xl glass-panel shadow-neon-soft interactive"
-            >
-              <div class="aspect-[4/3] bg-slate-700/40"></div>
-              <div
-                class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
-              ></div>
-              <p class="absolute bottom-4 left-4 text-sm font-medium">Kutlama anları</p>
-            </div>
-            <div
-              class="memory-tile group relative overflow-hidden rounded-3xl glass-panel shadow-neon-soft interactive"
-            >
-              <div class="aspect-[4/3] bg-slate-700/40"></div>
-              <p class="absolute bottom-4 left-4 text-sm font-medium">Aile kahkaha anları</p>
-            </div>
-            <div
-              class="memory-tile group relative overflow-hidden rounded-3xl glass-panel shadow-neon-soft interactive"
-            >
-              <div class="aspect-[4/3] bg-slate-700/40"></div>
-              <p class="absolute bottom-4 left-4 text-sm font-medium">Gece gülme krizleri</p>
+          <div class="glass-panel rounded-3xl p-4 md:p-6 shadow-neon-soft max-w-3xl mx-auto">
+            <div id="memory-frame" class="relative overflow-hidden rounded-2xl">
+              <div class="aspect-[4/3] w-full bg-slate-900/60">
+                <img src="./assets/photos/aran-1.jpg" alt="Aran fotoğraf 1" class="memory-photo w-full h-full object-cover opacity-100" />
+                <img src="./assets/photos/aran-2.jpg" alt="Aran fotoğraf 2" class="memory-photo w-full h-full object-cover hidden opacity-0" />
+                <img src="./assets/photos/aran-3.jpg" alt="Aran fotoğraf 3" class="memory-photo w-full h-full object-cover hidden opacity-0" />
+                <img src="./assets/photos/aran-4.jpg" alt="Aran fotoğraf 4" class="memory-photo w-full h-full object-cover hidden opacity-0" />
+                <img src="./assets/photos/aran-5.jpg" alt="Aran fotoğraf 5" class="memory-photo w-full h-full object-cover hidden opacity-0" />
+                <img src="./assets/photos/aran-6.jpg" alt="Aran fotoğraf 6" class="memory-photo w-full h-full object-cover hidden opacity-0" />
+                <img src="./assets/photos/aran-7.jpg" alt="Aran fotoğraf 7" class="memory-photo w-full h-full object-cover hidden opacity-0" />
+                <img src="./assets/photos/aran-8.jpg" alt="Aran fotoğraf 8" class="memory-photo w-full h-full object-cover hidden opacity-0" />
+                <img src="./assets/photos/aran-9.jpg" alt="Aran fotoğraf 9" class="memory-photo w-full h-full object-cover hidden opacity-0" />
+                <img src="./assets/photos/aran-10.jpg" alt="Aran fotoğraf 10" class="memory-photo w-full h-full object-cover hidden opacity-0" />
+                <img src="./assets/photos/aran-11.jpg" alt="Aran fotoğraf 11" class="memory-photo w-full h-full object-cover hidden opacity-0" />
+                <img src="./assets/photos/aran-12.jpg" alt="Aran fotoğraf 12" class="memory-photo w-full h-full object-cover hidden opacity-0" />
+                <img src="./assets/photos/aran-13.jpg" alt="Aran fotoğraf 13" class="memory-photo w-full h-full object-cover hidden opacity-0" />
+                <img src="./assets/photos/aran-14.jpg" alt="Aran fotoğraf 14" class="memory-photo w-full h-full object-cover hidden opacity-0" />
+                <img src="./assets/photos/aran-15.jpg" alt="Aran fotoğraf 15" class="memory-photo w-full h-full object-cover hidden opacity-0" />
+              </div>
+
+              <button
+                id="memory-prev"
+                class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full glass-panel flex items-center justify-center text-xs shadow-neon-soft interactive"
+                aria-label="Önceki fotoğraf"
+              >
+                ‹
+              </button>
+              <button
+                id="memory-next"
+                class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full glass-panel flex items-center justify-center text-xs shadow-neon-soft interactive"
+                aria-label="Sonraki fotoğraf"
+              >
+                ›
+              </button>
+
+              <div id="memory-dots" class="flex justify-center gap-1 mt-4 flex-wrap">
+                <button class="w-3 h-3 rounded-full bg-neonCyan"></button>
+                <button class="w-2 h-2 rounded-full bg-slate-600"></button>
+                <button class="w-2 h-2 rounded-full bg-slate-600"></button>
+                <button class="w-2 h-2 rounded-full bg-slate-600"></button>
+                <button class="w-2 h-2 rounded-full bg-slate-600"></button>
+                <button class="w-2 h-2 rounded-full bg-slate-600"></button>
+                <button class="w-2 h-2 rounded-full bg-slate-600"></button>
+                <button class="w-2 h-2 rounded-full bg-slate-600"></button>
+                <button class="w-2 h-2 rounded-full bg-slate-600"></button>
+                <button class="w-2 h-2 rounded-full bg-slate-600"></button>
+                <button class="w-2 h-2 rounded-full bg-slate-600"></button>
+                <button class="w-2 h-2 rounded-full bg-slate-600"></button>
+                <button class="w-2 h-2 rounded-full bg-slate-600"></button>
+                <button class="w-2 h-2 rounded-full bg-slate-600"></button>
+                <button class="w-2 h-2 rounded-full bg-slate-600"></button>
+              </div>
             </div>
           </div>
         </div>
@@ -379,9 +418,9 @@
       <!-- SECRET VAULT ZONE -->
       <section id="vault" class="relative py-24 px-6">
         <div class="max-w-4xl mx-auto text-center">
-          <h2 class="text-3xl md:text-4xl font-semibold mb-3">Srpriz Mektuplar Blm</h2>
+          <h2 class="text-3xl md:text-4xl font-semibold mb-3">Sürpriz Mektuplar Bölümü</h2>
           <p class="text-slate-300/80 mb-10 max-w-2xl mx-auto">
-            Renkli paralarn  fzerine t 1fkla; sadece birka f t 1fk sonras 1fnda i eeride seni bekleyen s frpriz bir mesaj ve hediye g eereceksin.
+            Kilit butonuna tıkladığında, içeride seni bekleyen küçük bir mektup ve üç boyutlu bir hediye ortaya çıkacak.
           </p>
 
           <div class="relative flex flex-col items-center gap-8">
@@ -389,24 +428,18 @@
               id="vault-lock"
               class="vault-lock glass-panel rounded-full w-40 h-40 flex items-center justify-center shadow-neon-strong mb-6 cursor-pointer"
             >
-              <span class="text-sm uppercase tracking-[0.25em] text-neonCyan/80">KİLİT</span>
-            </div>
-
-            <div class="flex flex-wrap justify-center gap-4 max-w-md">
-              <div class="vault-shard w-10 h-10 rounded-xl bg-neonBlue/80 shadow-neon-soft cursor-pointer"></div>
-              <div class="vault-shard w-10 h-10 rounded-xl bg-neonPurple/80 shadow-neon-soft cursor-pointer"></div>
-              <div class="vault-shard w-10 h-10 rounded-xl bg-neonPink/80 shadow-neon-soft cursor-pointer"></div>
-              <div class="vault-shard w-10 h-10 rounded-xl bg-neonCyan/80 shadow-neon-soft cursor-pointer"></div>
+              <span class="text-sm uppercase tracking-[0.25em] text-neonCyan/80">KİLİDİ AÇ</span>
             </div>
 
             <div id="vault-unlocked" class="hidden mt-8 text-center">
               <h3
                 class="text-2xl md:text-3xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-neonBlue via-neonPurple to-neonPink mb-4"
               >
-                Aran, Sen Çok Özelsin
+                Aran, Sen Bizim İçin Çok Özelsin
               </h3>
               <p class="text-slate-200/80 max-w-xl mx-auto mb-6">
-                Bu kilidi açtın; şimdi karşına çıkan hediye, senin ne kadar değerli olduğunu hatırlatmak için burada. Önünde çok güzel yıllar var.
+                Bu kilidi açtığında, aslında kalbimize açtığın yerleri de hatırlıyoruz. Annen, baban ve abin Ervin olarak,
+                ne kadar zorlanırsan zorlan, yanında olduğumuzu ve seni her zaman sevgiyle saracağımızı bilmeni istiyoruz.
               </p>
               <div id="vault-gift-3d" class="w-48 h-48 mx-auto"></div>
             </div>
@@ -439,15 +472,17 @@
         <div class="max-w-4xl mx-auto text-center">
           <h2 class="text-3xl md:text-4xl font-semibold mb-4">Sürpriz Hediye Kutusu</h2>
           <p class="text-slate-300/80 mb-10">
-            Kutunun üzerinde bir süre gezin; içeriden sana özel, Ervin&#39;den gelen küçük bir mektup ortaya çıkacak.
+            Kutunun üzerinde bir süre gezin; içeriden sana özel, annenin, babanın ve Ervin&#39;in birlikte yazdığı küçük bir
+            mektup ortaya çıkacak.
           </p>
 
           <div class="flex flex-col items-center gap-8">
             <div id="gift-box" class="gift-box glass-panel rounded-3xl w-56 h-56 shadow-neon-soft interactive"></div>
             <div id="gift-message" class="max-w-xl mx-auto text-slate-200/90 opacity-0">
               <p>
-                Aran, bu yıl sadece bir yaş daha büyüdüğün bir gün değil; seni ne kadar sevdiğimi tekrar hatırlatmak istediğim bir gün.
-                Hayallerinin peşinden gitmeye devam et; ben her zaman yanında, sessizce gururla bakıyor olacağım.
+                Aran, bu yıl senin için sadece bir yaş daha büyüdüğün bir gün değil; ailece seninle ne kadar gurur
+                duyduğumuzu tekrar tekrar hatırladığımız bir gün. Hayallerinin peşinden gitmeye devam et; annen, baban ve
+                abin Ervin olarak her adımında yanında duracak, düştüğünde kaldıracak ve ışığını asla yalnız bırakmayacağız.
               </p>
             </div>
           </div>
@@ -524,7 +559,7 @@
           <p class="text-xs md:text-sm text-slate-400">
             Bu sayfa,
             <span class="text-neonCyan font-semibold">Aran</span>
-            için
+            için annen, baban ve
             <span class="text-neonPink font-semibold">Ervin</span>
             tarafından sevgiyle hazırlandı — bolca animasyon eşliğinde.
           </p>

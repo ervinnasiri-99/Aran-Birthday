@@ -350,61 +350,107 @@ function setupScrollAnimations() {
 }
 
 function setupMessageTyping() {
-  const el = document.getElementById("message-typing");
+  const el = document.getElementById('message-typing');
   if (!el || !gsap) return;
 
   const text =
-    "Aran, sadece dogum gnn kutlu olsun demek istemedim; sana senin gibi hissettiren kk bir evren hazrlamak istedim: l l, zeki, biraz dank ama batan sona umut dolu. Kefetmeye, retmeye devam et ve bil ki hangi yola girersen gir, her zaman kalbimin en n srasnda seni destekliyorum.";
+    'Aran, bugün sadece doğum günün değil; annen, baban ve abin Ervin için seninle gurur duydukları her şeyi yeniden düşündükleri bir gün. Küçük detayları fark edişin, esprilerin ve kocaman kalbinle evimizi bambaşka bir yere dönüştürdün. Ne kadar değişirsen değiş, bil ki biz seni her hâlinle seviyor, yanında duruyor ve yeni yaşında da merakını, hayallerini ve ışığını kaybetmemen için hep sana destek oluyoruz.';
 
   gsap.fromTo(
     { progress: 0 },
-    { progress: 1, duration: 14, ease: "none" },
+    { progress: 1, duration: 14, ease: 'none' },
     {
       scrollTrigger: {
-        trigger: "#message",
-        start: "top 75%",
+        trigger: '#message',
+        start: 'top 75%',
         once: true,
       },
       onUpdate: function () {
         const p = this.targets()[0].progress;
         const count = Math.floor(text.length * p);
-        el.textContent = text.slice(0, count) + (count < text.length ? "_" : "");
+        el.textContent = text.slice(0, count) + (count < text.length ? '_' : '');
       },
     }
   );
 }
-
 function setupMemoryParallax() {
   if (!gsap) return;
-  const tiles = document.querySelectorAll(".memory-tile");
 
-  tiles.forEach((tile) => {
-    tile.addEventListener("pointermove", (e) => {
-      const rect = tile.getBoundingClientRect();
-      const relX = e.clientX - rect.left;
-      const relY = e.clientY - rect.top;
-      const dx = (relX / rect.width - 0.5) * 12;
-      const dy = (relY / rect.height - 0.5) * 12;
-      gsap.to(tile, {
-        x: dx,
-        y: dy,
-        scale: 1.03,
-        boxShadow:
-          "0 30px 80px rgba(15,23,42,0.8), 0 0 40px rgba(168,85,247,0.7)",
-        duration: 0.3,
-        ease: "power3.out",
+  const frame = document.getElementById("memory-frame");
+  const photos = document.querySelectorAll(".memory-photo");
+  const dotsContainer = document.getElementById("memory-dots");
+  const prevBtn = document.getElementById("memory-prev");
+  const nextBtn = document.getElementById("memory-next");
+
+  if (!frame || photos.length === 0) return;
+
+  let current = 0;
+  const dots = dotsContainer
+    ? Array.from(dotsContainer.querySelectorAll("button"))
+    : [];
+
+  const show = (index) => {
+    const total = photos.length;
+    const clamped = ((index % total) + total) % total;
+
+    photos.forEach((photo, i) => {
+      const isActive = i === clamped;
+      photo.classList.toggle("hidden", !isActive);
+      gsap.to(photo, {
+        opacity: isActive ? 1 : 0,
+        duration: 0.45,
+        ease: "power2.out",
       });
     });
 
-    tile.addEventListener("pointerleave", () => {
-      gsap.to(tile, {
-        x: 0,
-        y: 0,
-        scale: 1,
-        boxShadow: "0 20px 60px rgba(15,23,42,0.7)",
-        duration: 0.5,
-        ease: "power3.out",
+    if (dots.length === photos.length) {
+      dots.forEach((dot, i) => {
+        const isActive = i === clamped;
+        dot.classList.toggle("bg-neonCyan", isActive);
+        dot.classList.toggle("bg-slate-600", !isActive);
+        dot.classList.toggle("w-3", isActive);
+        dot.classList.toggle("w-2", !isActive);
       });
+    }
+
+    current = clamped;
+  };
+
+  show(0);
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => show(current - 1));
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => show(current + 1));
+  }
+
+  if (dots.length === photos.length) {
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => show(i));
+    });
+  }
+
+  frame.addEventListener("pointermove", (e) => {
+    const rect = frame.getBoundingClientRect();
+    const relX = (e.clientX - rect.left) / rect.width - 0.5;
+    const relY = (e.clientY - rect.top) / rect.height - 0.5;
+    const dx = relX * 14;
+    const dy = relY * 14;
+    gsap.to(frame, {
+      x: dx,
+      y: dy,
+      duration: 0.3,
+      ease: "power3.out",
+    });
+  });
+
+  frame.addEventListener("pointerleave", () => {
+    gsap.to(frame, {
+      x: 0,
+      y: 0,
+      duration: 0.5,
+      ease: "power3.out",
     });
   });
 }
@@ -463,40 +509,17 @@ function setupVault() {
   if (!gsap || !window.THREE) return;
 
   const lock = document.getElementById("vault-lock");
-  const shards = document.querySelectorAll(".vault-shard");
   const unlockedPanel = document.getElementById("vault-unlocked");
   const giftContainer = document.getElementById("vault-gift-3d");
 
   if (!lock || !unlockedPanel || !giftContainer) return;
 
-  let collected = 0;
-  const required = 1; // make unlocking much easier – only one shard needs to be clicked
+  let unlocked = false;
 
-  shards.forEach((shard) => {
-    shard.addEventListener("click", () => {
-      const lockRect = lock.getBoundingClientRect();
-      const target = {
-        x: lockRect.left + lockRect.width / 2 - shard.offsetWidth / 2,
-        y: lockRect.top + lockRect.height / 2 - shard.offsetHeight / 2,
-      };
-      gsap.to(shard, {
-        x: target.x - shard.getBoundingClientRect().left,
-        y: target.y - shard.getBoundingClientRect().top,
-        scale: 0.7,
-        boxShadow: "0 0 40px rgba(251,113,133,0.9)",
-        duration: 0.6,
-        ease: "power3.out",
-        onComplete: () => {
-          if (!shard.dataset.collected) {
-            shard.dataset.collected = "true";
-            collected++;
-            if (collected >= required) {
-              unlockVault(lock, unlockedPanel, giftContainer);
-            }
-          }
-        },
-      });
-    });
+  lock.addEventListener("click", () => {
+    if (unlocked) return;
+    unlocked = true;
+    unlockVault(lock, unlockedPanel, giftContainer);
   });
 }
 
@@ -763,25 +786,56 @@ function setupIntroAnimation() {
 
   const title = overlay.querySelector(".intro-title");
   const subtitle = overlay.querySelector(".intro-subtitle");
+  const continueBtn = overlay.querySelector("#intro-continue");
 
-  gsap.set([title, subtitle], { opacity: 0, y: 20 });
+  gsap.set([title, subtitle, continueBtn], { opacity: 0, y: 20 });
+  gsap.set(overlay, { opacity: 0 });
 
-  gsap
-    .timeline()
-    .to(overlay, { opacity: 1, duration: 0.3, ease: "power2.out" })
-    .to(title, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" })
+  const tl = gsap.timeline();
+
+  tl.to(overlay, { opacity: 1, duration: 0.4, ease: "power2.out" })
+    .to(title, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" })
     .to(
       subtitle,
+      { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+      "-=0.4"
+    )
+    .to(
+      continueBtn,
       { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
       "-=0.3"
-    )
-    .to(overlay, {
-      opacity: 0,
-      duration: 0.8,
-      delay: 0.8,
-      ease: "power2.inOut",
-      onComplete: () => overlay.remove(),
+    );
+
+  // Play a birthday-style confetti burst while the intro is visible
+  if (window.lottie) {
+    window.lottie.loadAnimation({
+      container: document.getElementById("hero-confetti"),
+      renderer: "svg",
+      loop: false,
+      autoplay: true,
+      path: "https://assets2.lottiefiles.com/packages/lf20_xlkxtmul.json",
     });
+  }
+
+  if (continueBtn) {
+    continueBtn.addEventListener("click", () => {
+      continueBtn.disabled = true;
+      gsap
+        .timeline()
+        .to(continueBtn, {
+          scale: 0.96,
+          opacity: 0.6,
+          duration: 0.2,
+          ease: "power2.inOut",
+        })
+        .to(overlay, {
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.inOut",
+          onComplete: () => overlay.remove(),
+        });
+    });
+  }
 }
 
 function setupHero() {
@@ -828,16 +882,6 @@ function setupHero() {
   }
   if (vaultBtn) {
     vaultBtn.addEventListener("click", () => scrollToSection("#gift"));
-  }
-
-  if (window.lottie) {
-    window.lottie.loadAnimation({
-      container: document.getElementById("hero-confetti"),
-      renderer: "svg",
-      loop: false,
-      autoplay: true,
-      path: "https://assets2.lottiefiles.com/packages/lf20_xlkxtmul.json",
-    });
   }
 }
 
