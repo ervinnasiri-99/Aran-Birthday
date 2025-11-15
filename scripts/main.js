@@ -534,22 +534,11 @@ function unlockVault(lock, panel, giftContainer) {
     ease: "power2.out",
   });
 
-  // Confetti only if Lottie is available
-  if (window.lottie) {
-    gsapLocal.to("#hero-confetti", {
-      opacity: 1,
-      duration: 0.1,
-      onStart: () => {
-        window.lottie.loadAnimation({
-          container: document.getElementById("hero-confetti"),
-          renderer: "svg",
-          loop: false,
-          autoplay: true,
-          path: "https://assets2.lottiefiles.com/packages/lf20_xlkxtmul.json",
-        });
-      },
-    });
-  }
+  // Small highlight animation on the lock
+  gsapLocal.to("#hero-confetti", {
+    opacity: 0,
+    duration: 0.2,
+  });
 
   panel.classList.remove("hidden");
   gsapLocal.fromTo(
@@ -810,17 +799,6 @@ function setupIntroAnimation() {
       { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
       "-=0.3"
     );
-
-  // Play a birthday-style confetti burst while the intro is visible
-  if (window.lottie) {
-    window.lottie.loadAnimation({
-      container: document.getElementById("hero-confetti"),
-      renderer: "svg",
-      loop: false,
-      autoplay: true,
-      path: "https://assets2.lottiefiles.com/packages/lf20_xlkxtmul.json",
-    });
-  }
 
   if (continueBtn) {
     continueBtn.addEventListener("click", () => {
